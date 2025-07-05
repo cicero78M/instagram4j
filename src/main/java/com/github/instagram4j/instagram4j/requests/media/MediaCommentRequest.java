@@ -3,6 +3,7 @@ package com.github.instagram4j.instagram4j.requests.media;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.github.instagram4j.instagram4j.IGClient;
+import com.github.instagram4j.instagram4j.IGConstants;
 import com.github.instagram4j.instagram4j.models.IGPayload;
 import com.github.instagram4j.instagram4j.requests.IGPostRequest;
 import com.github.instagram4j.instagram4j.responses.media.MediaCommentResponse;
@@ -24,8 +25,28 @@ public class MediaCommentRequest extends IGPostRequest<MediaCommentResponse> {
     }
 
     @Override
+    public String baseApiUrl() {
+        return IGConstants.BASE_GRAPH_URL;
+    }
+
+    @Override
+    public String apiPath() {
+        return "";
+    }
+
+    @Override
+    protected boolean isSigned() {
+        return false;
+    }
+
+    @Override
     public String path() {
-        return "media/" + id + "/comment/";
+        return id + "/comments";
+    }
+
+    @Override
+    public String getQueryString(IGClient client) {
+        return mapQueryString("message", _comment_text);
     }
 
     @Override
@@ -36,7 +57,7 @@ public class MediaCommentRequest extends IGPostRequest<MediaCommentResponse> {
     @Data
     @JsonInclude(Include.NON_NULL)
     private class MediaCommentPayload extends IGPayload {
-        private String comment_text = _comment_text;
+        private String message = _comment_text;
         private String replied_to_comment_id = _replied_to_comment_id;
     }
 

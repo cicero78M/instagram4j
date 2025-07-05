@@ -19,6 +19,11 @@ public class IGConstants {
     public static final String B_BASE_API_URL = "https://b.i.instagram.com/";
 
     /**
+     * Base Graph API URL
+     */
+    public static final String BASE_GRAPH_URL = "https://graph.facebook.com/";
+
+    /**
      * API v1 URL
      */
     public static final String API_V1 = "api/v1/";
